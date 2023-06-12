@@ -4,6 +4,9 @@ require("dotenv").config();
 
 const cookieParser = require("cookie-parser");
 const { connection } = require("./config/db");
+const { userRouter } = require("./routes/user.route");
+const { auth } = require("./middlewares/auth");
+const { weatherRouter } = require("./routes/weather.route");
 
 const app = express();
 
@@ -15,6 +18,10 @@ app.use(cookieParser());
 app.get("/",async(req,res)=>{
     res.send({message:"Welcome to weather app"})
 })
+
+app.use("/user",userRouter);
+app.use(auth);
+app.use("/weather",weatherRouter)
 
 app.listen(port,async()=>{
     try{
