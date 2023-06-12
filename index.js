@@ -19,5 +19,7 @@ app.listen(port,async()=>{
     try{
         await
         console.log(`connected to db listening on localhost:${port}`);
+    }catch(err){
+        console.log(err.message);
     }
 })
