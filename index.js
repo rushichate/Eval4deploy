@@ -2,7 +2,8 @@ const express = require("express")
 require("dotenv").config();
 
 
-const cookieParser = require("cookie-parser")
+const cookieParser = require("cookie-parser");
+const { connection } = require("./config/db");
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.get("/",async(req,res)=>{
 
 app.listen(port,async()=>{
     try{
-        await
+        await connection
         console.log(`connected to db listening on localhost:${port}`);
     }catch(err){
         console.log(err.message);
