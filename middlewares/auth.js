@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { redis } = require("../config/redis");
+const { winstonLogger } = require("./winston");
 require("dotenv").config();
 
 const auth = async (req,res,next)=>{
@@ -15,7 +16,7 @@ const auth = async (req,res,next)=>{
         req.payload = isTokenValid;
         next();
     }catch(err){
-
+        winstonLogger.error(error.message);
         res.status(400).send({message:"Authintication error",error:err.message})
     }
 }
